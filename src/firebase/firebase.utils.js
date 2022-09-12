@@ -1,6 +1,6 @@
 import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
+import 'firebase/compat/firestore';  //for database storage
+import 'firebase/compat/auth'; //for authentication
 
 const config =  {
   apiKey: "AIzaSyCRe0qxRs7LoWswJmMHP-31PnntEWMTfxs",
@@ -45,6 +45,53 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
   return userRef;
 };
+
+
+
+
+export const addCollectionAndDocuments = async (collectionKey,objectsToAdd)=>{
+  const collectionRef = firebase.collection(collectionKey)
+  //using this collection ref we dont have to manully make in the db  
+  //firebase will this collection object for us and the if we satrt
+  //adding elements to it as documents then firebase will start creating both 
+  //the collections and the documents inside a ffirestoreand we have to call this 
+  //function inot our app.js and afuter when we update our data on
+  //firestore we remove this bcz we only want to add it programicatally
+
+  // console.log(collectionRef);
+
+
+  //to add objects in as documents to our collection 
+  const batch = firestore.batch()
+  objectsToAdd.forEach(obj=>{
+    const newDocRef = collectionRef.doc(); //get a document at an empty string
+    //will give anew document collection reference in this collection and randomly generated the id
+    console.log(newDocRef )
+    batch.set(newDocRef,obj);
+  })
+
+  return await batch.commit();
+}
+
+
+//this fxn get the whole snapshot object
+export const convertCollectionsSnapshotToMap=(collections)=>{
+  const transformedCollection=collections.docs.map(doc=>{
+    const {title,items}=doc.data();
+
+    return {
+      routeName:encodeURI(title.toLowerCase()),
+      id:doc.id,
+      title,
+      items
+    }
+  })
+  // console.log(transformedCollection)
+  return transformedCollection.reduce((accumultaor,collection)=>{
+    accumultaor[collection.title.toLowerCase()]=collection
+    return accumultaor;
+  },{})
+}
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

@@ -8,7 +8,8 @@ const FormInput = ({ handleChange, label, ...otherProps }) => (
     {label ? (
       <label
         className={`${
-          otherProps.value.length ? 'shrink' : ''
+          otherProps.value.length ? 'shrink' : ''//when the usertype anything
+          //we add the shrink property
         } form-input-label`}
       >
         {label}

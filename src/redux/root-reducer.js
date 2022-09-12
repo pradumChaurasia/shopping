@@ -10,7 +10,7 @@ import shopReducer from './shop/shop.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['cart'] //here the only reducer we want ot persist is the cart
+  whitelist: ['cart'] //here the only reducer we want at persist is the cart
   
 };
 
@@ -22,3 +22,6 @@ const rootReducer = combineReducers({
 });
 
 export default persistReducer(persistConfig, rootReducer);
+
+
+//rootReducer combine all the reducer in our application
