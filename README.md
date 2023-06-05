@@ -1,3 +1,10 @@
+#about the project:
+Built an E-commerce website using React and Firebase 
+• Used React with Redux to allow users to instantly update the cart list without reloading. 
+• Integrated the site with Stripe API to handle payments. 
+• Used Firebase for authorising our users with google using google accounts along with sign out and sign-up features.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
