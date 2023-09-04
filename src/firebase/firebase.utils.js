@@ -52,7 +52,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 
 export const addCollectionAndDocuments = async (collectionKey,objectsToAdd)=>{
-  const collectionRef = firebase.collection(collectionKey)
+  const collectionRef = firestore.collection(collectionKey)
   //using this collection ref we dont have to manully make in the db  
   //firebase will this collection object for us and the if we satrt
   //adding elements to it as documents then firebase will start creating both 
